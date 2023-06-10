@@ -128,19 +128,21 @@ namespace MagicVilla_VillaAPI.Controllers
 			return NoContent();
 		}
 
-        /*When we want to update only one property from the object
-		 *For details: https://jsonpatch.com/
+		/*When we want to update only one property from the object
+		 *For details: https://jsonpatch.com/ 
+		 *The packages that were installed for this
+		 *=> 
 		 */
-        [HttpPut("{id:int}", Name ="UpdatePartialVilla")]
-		public IActionResult UpdatePartialVilla(int id, JsonPatchDocument<VillaDTO>patchDTO)
+		[HttpPatch("{id:int}", Name = "UpdatePartialVilla")]
+		public IActionResult UpdatePartialVilla(int id, JsonPatchDocument<VillaDTO> patchDTO)
 		{
-			if(patchDTO == null || id == 0)
+			if (patchDTO == null || id == 0)
 			{
 				return BadRequest();
 			}
 
 			var villa = VillaStore.villaList.FirstOrDefault(u => u.Id == id);
-			if(villa == null)
+			if (villa == null)
 			{
 				return BadRequest();
 			}
@@ -150,13 +152,12 @@ namespace MagicVilla_VillaAPI.Controllers
 			{
 				return BadRequest(ModelState);
 			}
-			
-
-
 			return Ok();
 		}
 
-	
+		
+
+
 	}
 }
 
