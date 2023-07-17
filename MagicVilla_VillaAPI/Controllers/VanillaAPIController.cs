@@ -11,6 +11,22 @@ namespace MagicVilla_VillaAPI.Controllers
 	[ApiController]
 	public class VanillaAPIController : ControllerBase
 	{
+
+		/*Adding a dependency injenction for logger on this controller. To do so,
+		 *we need to build a contructor. Shortcut for that is: ctor + double tab.
+		 *Logger: can help us to show more information to the console 
+		 */
+		private readonly ILogger<VanillaAPIController> _logger; //a private variable is usually written with an underscore. e.g _logger
+        public VanillaAPIController(ILogger<VanillaAPIController> logger) //this is a constructor
+        {
+
+			_logger = logger;
+		}
+		
+
+					
+		
+
 		//gets all the datas
 		[HttpGet]
 		public ActionResult <IEnumerable<VillaDTO>>GetVillas()
@@ -41,6 +57,7 @@ namespace MagicVilla_VillaAPI.Controllers
 		{
 			if(id == 0)
 			{
+				_logger.LogError("Get Villa Error with Id" + id);
 				return BadRequest();
 			}
 
